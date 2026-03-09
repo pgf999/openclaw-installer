@@ -1,0 +1,50 @@
+name: Test Installation
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Test install script
+        run: |
+          chmod +x install.sh
+          # Dry run test
+          echo "Testing install script syntax..."
+          bash -n install.sh
+          
+      - name: Test update script
+        run: |
+          chmod +x update.sh
+          bash -n update.sh
+          
+      - name: Test uninstall script
+        run: |
+          chmod +x uninstall.sh
+          bash -n uninstall.sh
+
+  test-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Test install script
+        run: |
+          chmod +x install.sh
+          bash -n install.sh
+          
+      - name: Test update script
+        run: |
+          chmod +x update.sh
+          bash -n update.sh
+          
+      - name: Test uninstall script
+        run: |
+          chmod +x uninstall.sh
+          bash -n uninstall.sh
